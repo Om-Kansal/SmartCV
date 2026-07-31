@@ -3,14 +3,10 @@ import React, { useEffect, useState } from 'react'
 import {Link, useParams } from 'react-router-dom'
 import PersonalInfoForm from '../components/PersonalInfoForm'
 import { dummyResumeData } from '../assets/assets'
-// import MinimalImageTemplate from '../assets/templates/MinimalImageTemplate'
-// import ClassicTemplate from '../assets/templates/ClassicTemplate'
-// import ModernTemplate from '../assets/templates/ModernTemplate'
-// import MinimalTemplate from '../assets/templates/MinimalTemplate'
 
 const ResumeBuilder = () => {
 
-  const {resumeId} = useParams()
+  const {resumeID} = useParams()
 
   const [resumeData, setResumeData] = useState({
     _id: '',
@@ -27,7 +23,7 @@ const ResumeBuilder = () => {
   })
 
   const loadExistingResume = async () => {
-    const resume = dummyResumeData.find(resume => resume._id == resumeId)
+    const resume = dummyResumeData.find(resume => resume._id == resumeID)
     if(resume){
       setResumeData(resume)
       document.title = resume.title
@@ -96,7 +92,15 @@ const ResumeBuilder = () => {
           </div>
 
           {/* right panel - preview */}
-          <div></div>
+          <div className='lg:col-span-7 max-lg:mt-6'>
+              <div>
+                {/* ----- buttons ---- */}
+
+              </div>
+
+              {/* ---- resume preview */}
+              
+          </div>
 
         </div>
       </div>
