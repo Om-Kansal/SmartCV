@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import {Link, useParams } from 'react-router-dom'
 import PersonalInfoForm from '../components/PersonalInfoForm'
 import { dummyResumeData } from '../assets/assets'
+import ResumePreview from '../components/ResumePreview'
+import TemplateSelector from '../components/TemplateSelector'
 
 const ResumeBuilder = () => {
 
@@ -67,7 +69,12 @@ const ResumeBuilder = () => {
 
               {/* section navigation */}
               <div className='flex justify-between items-center mb-6 border-b border-gray-300 py-1'>
-                <div></div>
+
+                <div className='flex items-center gap-2'>
+                  <TemplateSelector selectedTemplate={resumeData.template} onChange={(template)=> setResumeData(prev => ({...prev, template}))} />
+
+                </div>
+
                 <div className='flex item-center'>
                   {activeSectionIndex !== 0 && (
                     <button onClick={()=> setActiveSectionIndex((prevIndex)=> Math.max(prevIndex-1, 0))} className='flex items-center gap-1 p3 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all' disabled={activeSectionIndex === 0}>
@@ -99,7 +106,7 @@ const ResumeBuilder = () => {
               </div>
 
               {/* ---- resume preview */}
-              
+              <ResumePreview data={resumeData} template={resumeData.template} accentColor={resumeData.accent_color}/>
           </div>
 
         </div>
