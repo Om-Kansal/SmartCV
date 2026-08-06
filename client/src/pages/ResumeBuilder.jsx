@@ -6,6 +6,7 @@ import { dummyResumeData } from '../assets/assets'
 import ResumePreview from '../components/ResumePreview'
 import TemplateSelector from '../components/TemplateSelector'
 import ColorPicker from '../components/ColorPicker'
+import ProfessionalSummaryForm from '../components/ProfessionalSummaryForm'
 
 const ResumeBuilder = () => {
 
@@ -66,7 +67,7 @@ const ResumeBuilder = () => {
             <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-6 pt-1'>
               {/* progress bar using activeSectionIndex */}
               <hr className='absolute top-0 left-0 right-0 border-2 border-gray-200' />
-              <hr className='absolute top-0 left-0 h-1 bg-gradient-to-r from-green-500 to-green-600 border-none transition-all duration-2000' style={{width: `${activeSectionIndex * 100 / (sections.length - 1)}`}} />
+              <hr className='absolute top-0 left-0 h-1 bg-gradient-to-r from-green-500 to-green-600 border-none transition-all duration-2000' style={{width: `${activeSectionIndex * 100 / (sections.length - 1)}%`}} />
 
               {/* section navigation */}
               <div className='flex justify-between items-center mb-6 border-b border-gray-300 py-1'>
@@ -82,7 +83,7 @@ const ResumeBuilder = () => {
                       <ChevronLeft className='size-4' /> Previous
                     </button>
                   )}
-                  <button onClick={()=> setActiveSectionIndex((prevIndex)=> Math.min(prevIndex+1, sections.length-1))} className={`flex items-center gap-1 p-3 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all ${activeSectionIndex === sections.length - 1 && 'opacity-50'}`} disabled={activeSectionIndex === sections.length}>
+                  <button onClick={()=> setActiveSectionIndex((prevIndex)=> Math.min(prevIndex+1, sections.length-1))} className={`flex items-center gap-1 p-3 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all ${activeSectionIndex === sections.length - 1 && 'opacity-50'}`} disabled={activeSectionIndex === sections.length - 1}>
                       Next <ChevronRight className='size-4' /> 
                     </button>
                 </div>
@@ -93,6 +94,9 @@ const ResumeBuilder = () => {
               <div className='space-y-6'>
                   {activeSection.id === "personal" && (
                     <PersonalInfoForm data={resumeData.personal_info} onChange={(data)=>setResumeData(prev => ({...prev, personal_info:data}))} removeBackground={removeBackground} setRemoveBackground={setRemoveBackground} />
+                  )}
+                  {activeSection.id === 'summary' && (
+                    <ProfessionalSummaryForm data={resumeData.professional_summary} onChange={(data)=> setResumeData(prev => ({...prev, professional_summary: data}))} setResumeData={setResumeData} />
                   )}
               </div>
 
