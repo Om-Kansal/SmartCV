@@ -75,3 +75,28 @@ export const loginUser = async (req, res) => {
         return res.status(400).json({message: error.message})
     }
 }
+
+
+// controller for getting user by id
+// POST: /api/users/data
+
+export const getUserById = async (req, res) => {
+    try {
+        
+        const userId = req.userId;
+
+        //check if user exists
+        const user = await User.findById(userId)
+        if(!user){
+            return res.status(404).json({message: 'user not found'})
+        }
+
+        //return user
+        user.password = undefined
+
+        return res.status(200).json({message: 'Login successful', user})
+
+    } catch (error) {
+        return res.status(400).json({message: error.message})
+    }
+}
