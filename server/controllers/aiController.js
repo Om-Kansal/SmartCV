@@ -1,9 +1,7 @@
-
-
-// contoller for enhancing a resume's professional summary
-
+import ai from "../configs/ai.js";
 import Resume from "../models/Resume.js";
 
+// contoller for enhancing a resume's professional summary
 // POST: /api/ai/enhance-pro-sum
 export const enhanceProfessionalSummary = async (req, res) => {
     try {
