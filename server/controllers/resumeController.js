@@ -12,7 +12,7 @@ export const createResume = async (req, res) => {
        const {title} = req.body;
 
        // create new resume
-       const newResume = await Resume.crete({userId, title})
+       const newResume = await Resume.create({userId, title})
 
        //return success message
        return res.status(201).json({message: 'Resume created successfully', resume: newResume}) 
@@ -87,7 +87,7 @@ export const updateResume = async (req, res) => {
         const {resumeId, resumeData, removeBackground} = req.body;
         const image = req.file;
 
-        let resumeDataCopy = JSON.parse(resumeData);
+        let resumeDataCopy = JSON.parse(JSON.stringify(resumeData));
 
         if(image){
 
