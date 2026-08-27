@@ -96,8 +96,7 @@ export const uploadResume = async (req, res) => {
                 website: {type:String, default: ''},
             },
             experience: [
-                {
-                    comapany: { type: String },
+                    company: { type: String },
                     position: { type: String },
                     start_date: { type: String },
                     end_date: { type: String },

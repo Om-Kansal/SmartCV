@@ -20,12 +20,12 @@ const ResumeSchema = new mongoose.Schema({
     },
     experience: [
         {
-            comapany: { type: String },
+            company: { type: String },
             position: { type: String },
             start_date: { type: String },
             end_date: { type: String },
             description: { type: String },
-            is_current: { type: String },
+            is_current: { type: Boolean },
         }
     ],
     projects: [

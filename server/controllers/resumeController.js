@@ -87,7 +87,19 @@ export const updateResume = async (req, res) => {
         const {resumeId, resumeData, removeBackground} = req.body;
         const image = req.file;
 
-        let resumeDataCopy = JSON.parse(JSON.stringify(resumeData));
+        // let resumeDataCopy = JSON.parse(JSON.stringify(resumeData));
+        let resumeDataCopy;
+        if(typeof resumeData === 'string'){
+            resumeDataCopy = await JSON.parse(resumeData)
+        }else{
+            resumeDataCopy = structuredClone(resumeData)
+        }
+           
+
+        if (resumeDataCopy.project !== undefined) {
+            resumeDataCopy.projects = resumeDataCopy.project;
+            delete resumeDataCopy.project;
+        }
 
         if(image){
 
@@ -106,7 +118,8 @@ export const updateResume = async (req, res) => {
 
         }
 
-        const resume = await Resume.findByIdAndUpdate({userId, _id: resumeId}, resumeDataCopy, {new: true})
+        const resume = await Resume.findOneAndUpdate({userId, _id: resumeId}, resumeDataCopy, {new: true})
+        // const resume = await Resume.findByIdAndUpdate({userId, _id: resumeId}, resumeDataCopy, {new: true})
 
         return res.status(200).json({message: 'saved seccessfully', resume})
     } catch (error) {

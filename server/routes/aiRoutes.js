@@ -5,7 +5,7 @@ import { enhanceJobDescription, enhanceProfessionalSummary, uploadResume } from 
 
 const aiRouter = express.Router();
 
-aiRouter.post('/enhanc-pro-sum', protect, enhanceProfessionalSummary)
+aiRouter.post('/enhance-pro-sum', protect, enhanceProfessionalSummary)
 aiRouter.post('/enhanc-job-sum', protect, enhanceJobDescription)
 aiRouter.post('/upload-resume', protect, uploadResume)
 
