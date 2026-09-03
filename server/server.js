@@ -11,7 +11,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Database connection
-await connectDB()
+// await connectDB()
+app.use(async (req, res, next) => {
+  await connectDB();
+  next();
+});
 
 app.use(express.json())
 app.use(cors())
@@ -21,7 +25,16 @@ app.use('/api/users', userRouter)
 app.use('/api/resumes', resumeRouter)
 app.use('/api/ai', aiRouter)
 
-app.listen(PORT, ()=>{
-    console.log(`Server is running on ${PORT}`);
-    
-});
+export default app;
+
+// app.listen(PORT, ()=>{
+//         console.log(`Server is running on ${PORT}`);
+        
+// });
+
+if(process.env.PRODUCTION !== "true"){
+    app.listen(PORT, ()=>{
+        console.log(`Server is running on ${PORT}`);
+        
+    });
+}
